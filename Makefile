@@ -10,3 +10,8 @@ dist:
 	cd ..
 	tar -cz qtzz > qtzz.tgz
 
+commit:
+	svn commit
+
+update:
+	svn update
