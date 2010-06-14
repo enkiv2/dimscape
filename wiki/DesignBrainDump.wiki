@@ -16,6 +16,6 @@ If we change the negward link on a rendered cell such that it links to an alread
 = UI =
 
 Modes:
-- row mode - default, truncates text and resizes other stuff to a static square or rectangle, show however many things around cursor as fit, highlight around square for cursor (or use gzz's blue/green thing)
-- z2 mode - square sized to content, display only the posward and negward links from the cell with the cursor
-- expanding mode - the cell with the cursor is bigger and fully opaque. As you get further away from the current/cursor cell the cells get smaller and more transparent. The cell still fits to content, but the content is scaled down. Smaller cells are drawn first, and bigger cells are drawn on top of them.
+  * row mode - default, truncates text and resizes other stuff to a static square or rectangle, show however many things around cursor as fit, highlight around square for cursor (or use gzz's blue/green thing)
+  * z2 mode - square sized to content, display only the posward and negward links from the cell with the cursor
+  * expanding mode - the cell with the cursor is bigger and fully opaque. As you get further away from the current/cursor cell the cells get smaller and more transparent. The cell still fits to content, but the content is scaled down. Smaller cells are drawn first, and bigger cells are drawn on top of them.
