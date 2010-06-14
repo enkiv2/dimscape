@@ -3,7 +3,7 @@
 Cell::Cell() { // default constructor
 	content="";
 	type=0;
-	id=-1;
+	id=-1; /* if this is -1 then the cell is uninitialized. This is very useful for transparency with the database */
 }
 
 void Cell::setContent(char* cont) {

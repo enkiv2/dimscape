@@ -1,3 +1,9 @@
+/* Cell.h - headers for the zz cell
+ * (c) 2010 John Ohno
+ * Licensed under the GNU GPL v.3
+ * Part of the DimScape project
+ */
+
 #ifndef CELL_H
 #define CELL_H
 
@@ -5,7 +11,7 @@ using namespace std;
 #include <map>
 #include <string>
 
-#define cellID int
+#define cellID int /* might change this later to int64_t or something */
 
 class Cell {
 	public:
@@ -30,7 +36,7 @@ class Cell {
 
 #ifndef ZZWORLD
 #define ZZWORLD
-map<cellID,Cell> world; 
+map<cellID,Cell> world; /* this should include all cells */
 #endif
 
 #endif
