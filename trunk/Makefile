@@ -1,6 +1,6 @@
 all: clean src
 
-clean:
+clean: qtclean
 	rm -f *.o
 
 src:
@@ -15,3 +15,13 @@ commit:
 
 update:
 	svn update
+
+qtsrc: Makefile.qt
+	make -f Makefile.qt
+
+qtclean: Makefile.qt
+	make -f Makefile.qt clean
+
+Makefile.qt:
+	qmake qtzz.pro -o Makefile.qt
+
