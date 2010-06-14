@@ -1,0 +1,12 @@
+#summary Design discussion
+#labels Phase-Design,Phase-Requirements
+
+= Cell data structure =
+
+Cells are stored by cellID (an integer) in the 'world', which is a hash table. A cell has an internal representation of its own ID, which is important because not only does it let us do sanity checks, but the special value of -1 will tell us that the cell is a dummy created for the sake of some other cell and that we need to pull the real content from the database before we render it.
+
+We can assume that the database will store only posward links. So, the negward links need to be figured out. The database can be queried if we have constructed a cell that links negwardly on a visible dimension to another cell that has not yet been loaded.
+
+= Corner cases =
+
+If we change the negward link on a rendered cell such that it links to an already existent but not loaded cell, we will have some trouble. In this corner case we will need to load this cell before doing the link stuff.
