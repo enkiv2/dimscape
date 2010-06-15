@@ -53,7 +53,7 @@ class ZZCell : public QObject {
 
 #ifndef ZZWORLD
 #define ZZWORLD
-QHash<cellID,ZZCell> world; /* this should include all cells */
+extern QHash<cellID,ZZCell> world; /* this should include all cells */
 #endif
 
 #endif

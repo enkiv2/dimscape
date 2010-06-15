@@ -1,5 +1,7 @@
 #include <Cell.h>
 
+#define ZZWORLD
+QHash<cellID,ZZCell> world;
 
 ZZCell::ZZCell(const ZZCell& simulacrum) {
 	id=((ZZCell&)simulacrum).getID();
