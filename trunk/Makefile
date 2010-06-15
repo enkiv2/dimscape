@@ -9,8 +9,7 @@ cellsrc:
 	gcc -Wall  -c -I. -o Cell.o Cell.cpp
 
 dist:
-	cd ..
-	tar -cz qtzz > qtzz.tgz
+	tar -cz ../dimscape > ../dimscape-`date +%F`.tgz
 
 commit:
 	svn commit
