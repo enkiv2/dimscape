@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QGraphicsSimpleTextItem>
 #include <QFileDialog>
+#include "zzgraphicscell.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +17,14 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete scene;
+}
+
+void MainWindow::newWorld()
+{
+	world.insert(1, *(new ZZCell()));
+	world[1].setID(1);
+	world[1].setContent(*(new QString("Press i to edit me!")));
+	scene->addItem(new ZZGraphicsCell(&(world[1]), scene, (qreal)10, (QGraphicsItem*)0));
 }
 
 void MainWindow::loadFile()
