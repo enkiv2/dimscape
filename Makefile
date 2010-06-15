@@ -1,7 +1,7 @@
-all: clean src
+all:  src
 
 clean: qtclean
-	rm -f *.o
+	rm -f *.o Makefile.qt
 
 src:  qtsrc
 
@@ -24,6 +24,9 @@ qtsrc: Makefile.qt
 qtclean: Makefile.qt
 	make -f Makefile.qt clean
 
-Makefile.qt:
+Makefile.qt: FORCE
 	qmake qtzz.pro -o Makefile.qt
+
+FORCE:
+
 
