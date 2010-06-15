@@ -1,51 +1,70 @@
-#include <Cell.h>
+#include <ZZCell.h>
 
-Cell::Cell() { // default constructor
+
+ZZCell::ZZCell() { // default constructor
 	content="";
 	type=0;
 	id=-1; /* if this is -1 then the cell is uninitialized. This is very useful for transparency with the database */
 }
 
-void Cell::setContent(char* cont) {
-	content=content;
+void ZZCell::setContent(QString& cont) {
+	// a bit dangerous not having a guard here
+	// due to potential cyclical slot/signal signal/slot
+	// but, a full-text comparison check seems a bit much,
+	// maybe for a debug build
+	content=cont;
+	emit contentChanged(cont);
 }
 
-char* Cell::getContent() {
-	return (char*)content.c_str();
+QString ZZCell::getContent() {
+	// the callee gets a copy
+	return QString(content);
 }
 
-void Cell::setNeg(cellID neg, string dimension) {
-        negward[dimension]=neg;
-}
-
-
-void Cell::setPos(cellID pos, string dimension) {
-	posward[dimension]=pos;
-	world[pos].setNeg(getID(), dimension);
-}
-
-cellID Cell::getPos(string dimension) {
-	return posward[dimension];
+void ZZCell::setNeg(cellID neg, QString& dimension) {
+	if (!negward.contains(dimension))
+	{
+        	negward.insert(dimension, neg);
+		emit negwardChanged(pos, dimension);
+	}
 }
 
 
-cellID Cell::getNeg(string dimension) {
-	return negward[dimension];
+void ZZCell::setPos(cellID pos, QString& dimension) {
+	if (!posward.contains(dimension))
+	{
+		posward.insert(dimension, pos);
+		world.value(pos).setNeg(getID(), dimension);
+		emit poswardChanged(pos, dimension);
+	}
 }
 
-void Cell::setType(int typ) {
-	type=typ;
+cellID ZZCell::getPos(QString& dimension) {
+	return posward.value(dimension);
 }
 
-int Cell::getType() {
+
+cellID ZZCell::getNeg(QString& dimension) {
+	return negward.value(dimension);
+}
+
+void ZZCell::setType(int typ) {
+	if (type != typ)
+	{
+		type=typ;
+		emit typeChanged(typ);
+	}
+}
+
+int ZZCell::getType() {
 	return type;
 }
 
-cellID Cell::getID() {
+cellID ZZCell::getID() {
 	return id;
 }
 
-void Cell::setID(cellID myId) {
+void ZZCell::setID(cellID myId) {
 	if(id<0) { // cell IDs should be immutable.
 		id=myId;
 	}

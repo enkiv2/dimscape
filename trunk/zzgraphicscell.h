@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 
+
 class ZZGraphicsCell : public QGraphicsItem
 {
 
@@ -31,7 +32,9 @@ public:
 
 private:
     qreal penThick;
+    
 
 };
 
+}
 #endif // ZZGRAPHICSCELL_H
