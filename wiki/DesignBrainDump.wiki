@@ -22,3 +22,14 @@ http://dimscape.googlecode.com/svn/trunk/docs/row.gif
 http://dimscape.googlecode.com/svn/trunk/docs/xbar.gif
   * expanding mode - the cell with the cursor is bigger and fully opaque. As you get further away from the current/cursor cell the cells get smaller and more transparent. The cell still fits to content, but the content is scaled down. Smaller cells are drawn first, and bigger cells are drawn on top of them.
 http://dimscape.googlecode.com/svn/trunk/docs/expand.gif
+
+= Pretty Pictures =
+
+http://dimscape.googlecode.com/svn/trunk/dimscape-logo-notrans.png
+White background
+
+http://dimscape.googlecode.com/svn/trunk/dimscape-logo.png
+Transparent background
+
+http://dimscape.googlecode.com/svn/trunk/dimscape-logo.xpm
+XPM file
