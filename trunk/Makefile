@@ -3,7 +3,7 @@ all: clean src
 clean: qtclean
 	rm -f *.o
 
-src:
+src: qtsrc
 	gcc -c -I. -o Cell.o Cell.cpp
 
 dist:
@@ -21,7 +21,6 @@ qtsrc: Makefile.qt
 
 qtclean: Makefile.qt
 	make -f Makefile.qt clean
-	rm Makefile.qt
 
 Makefile.qt:
 	qmake qtzz.pro -o Makefile.qt
