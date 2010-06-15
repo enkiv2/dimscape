@@ -62,7 +62,10 @@ public:
     	return UserType+(*me).getType();
     }
 
-
+    bool isVisible() 
+    {
+    	return true;
+    }
 
     QRectF boundingRect() const
     {
