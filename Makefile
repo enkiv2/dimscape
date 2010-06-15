@@ -3,8 +3,10 @@ all: clean src
 clean: qtclean
 	rm -f *.o
 
-src: qtsrc
-	gcc -c -I. -o Cell.o Cell.cpp
+src: cellsrc qtsrc
+
+cellsrc: 
+	gcc -Wall  -c -I. -o Cell.o Cell.cpp
 
 dist:
 	cd ..
