@@ -2,7 +2,7 @@
 #define ZZGRAPHICSCELL_H
 
 #include <QGraphicsItem>
-
+#include <Qt/qpainter.h>
 
 class ZZGraphicsCell : public QGraphicsItem
 {
@@ -36,5 +36,4 @@ private:
 
 };
 
-}
 #endif // ZZGRAPHICSCELL_H
