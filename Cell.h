@@ -29,6 +29,18 @@ class ZZCell : public QObject {
 	void setID(cellID myId);
 	QList<QString> getDims();
 
+	ZZCell& operator=(const ZZCell& simulacrum) {
+		 id=((ZZCell&)simulacrum).getID();
+		 content=((ZZCell&)simulacrum).getContent();
+		 type=((ZZCell&)simulacrum).getType();
+		 QList<QString> temp=((ZZCell&)simulacrum).getDims();
+		 for( int i=0; i < temp.size(); i++ ) {
+	                 setPos(((ZZCell&)simulacrum).getPos((QString&)temp.at(i)), (QString&)temp.at(i));
+	                 setNeg(((ZZCell&)simulacrum).getNeg((QString&)temp.at(i)), (QString&)temp.at(i));
+	         }
+		 return *this;
+	}
+
 	public slots:
 	void setContent(QString& cont);
 	void setPos(cellID pos, QString& dimension);

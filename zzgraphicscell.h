@@ -20,11 +20,56 @@ public:
     	me=new ZZCell();
     }
 
-    QRectF boundingRect()
+    ~ZZGraphicsCell() {
+    	delete me;
+    }
+
+    ZZGraphicsCell(ZZCell* foo, QGraphicsScene* aScene, qreal aPenThick, QGraphicsItem* aParent=0) : 
+    	QGraphicsItem(aParent, aScene), penThick(aPenThick) 
+    {
+		me=foo;
+    }
+    
+    void advance(int phase) {}
+
+    bool collidesWithItem(const QGraphicsItem * other, Qt::ItemSelectionMode  mode = Qt::IntersectsItemShape) 
+    {
+    	return false;
+    }
+
+    bool collidesWithPath ( const QPainterPath & path, Qt::ItemSelectionMode  mode = Qt::IntersectsItemShape ) 
+    {
+    	return false;
+    }
+
+    bool contains ( const QPointF & point  ) 
+    {
+    	return false;
+    }
+
+    bool isObscuredBy ( const QGraphicsItem * item  )
+    {
+    	return false;
+    }
+    /*
+    QPainterPath  opaqueArea () 
+    {
+    	return new QPainterPath();
+    }
+    */
+    int type ()
+    {
+    	return UserType+(*me).getType();
+    }
+
+
+
+    QRectF boundingRect() const
     {
         QRectF lowBox = childrenBoundingRect();
         return QRectF(lowBox.left() - penThick/2, lowBox.top() - penThick/2, lowBox.width() + penThick, lowBox.height() + penThick);
     }
+
     void setMe(ZZCell* foo) {
     	delete me;
     	me=foo;

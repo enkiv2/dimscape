@@ -16,7 +16,7 @@ public:
 
 public slots:
     void loadFile();
-
+    void newWorld();
 protected:
     void changeEvent(QEvent *e);
 
