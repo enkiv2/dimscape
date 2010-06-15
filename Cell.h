@@ -20,13 +20,15 @@ class ZZCell : public QObject {
 	
 	public:
 	ZZCell();
+	ZZCell(const ZZCell& simulacrum);
 	QString getContent();
 	cellID getPos(QString& dimension);
 	cellID getNeg(QString& dimension);
 	int getType();
 	cellID getID();
 	void setID(cellID myId);
-	
+	QList<QString> getDims();
+
 	public slots:
 	void setContent(QString& cont);
 	void setPos(cellID pos, QString& dimension);
