@@ -1,4 +1,4 @@
-#include <ZZCell.h>
+#include <Cell.h>
 
 
 ZZCell::ZZCell() { // default constructor
@@ -25,7 +25,7 @@ void ZZCell::setNeg(cellID neg, QString& dimension) {
 	if (!negward.contains(dimension))
 	{
         	negward.insert(dimension, neg);
-		emit negwardChanged(pos, dimension);
+		emit negwardChanged(neg, dimension);
 	}
 }
 
@@ -34,7 +34,7 @@ void ZZCell::setPos(cellID pos, QString& dimension) {
 	if (!posward.contains(dimension))
 	{
 		posward.insert(dimension, pos);
-		world.value(pos).setNeg(getID(), dimension);
+		world.value(pos).setNeg(id, dimension);
 		emit poswardChanged(pos, dimension);
 	}
 }

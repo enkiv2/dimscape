@@ -9,6 +9,8 @@
 
 #include <QHash>
 #include <QString>
+#include <Qt/qhash.h>
+#include <Qt/qstring.h>
 
 #define cellID qint64
 
@@ -49,7 +51,7 @@ class ZZCell : public QObject {
 
 #ifndef ZZWORLD
 #define ZZWORLD
-QHash<cellID,Cell> world; /* this should include all cells */
+QHash<cellID,ZZCell> world; /* this should include all cells */
 #endif
 
 #endif
