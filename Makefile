@@ -1,6 +1,6 @@
 all:  src
 
-clean: qtclean
+clean: 
 	rm -f *.o Makefile.qt
 
 src:  qtsrc
