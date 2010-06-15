@@ -1,6 +1,21 @@
 #include <Cell.h>
 
 
+ZZCell::ZZCell(const ZZCell& simulacrum) {
+	id=((ZZCell&)simulacrum).getID();
+	content=((ZZCell&)simulacrum).getContent();
+	type=((ZZCell&)simulacrum).getType();
+	QList<QString> temp=((ZZCell&)simulacrum).getDims();
+	for( int i=0; i < temp.size(); i++ ) {
+		setPos(((ZZCell&)simulacrum).getPos((QString&)temp.at(i)), (QString&)temp.at(i));
+		setNeg(((ZZCell&)simulacrum).getNeg((QString&)temp.at(i)), (QString&)temp.at(i));
+	}
+}
+
+QList<QString> ZZCell::getDims() {
+	return posward.keys();
+}
+
 ZZCell::ZZCell() { // default constructor
 	content="";
 	type=0;
@@ -34,7 +49,7 @@ void ZZCell::setPos(cellID pos, QString& dimension) {
 	if (!posward.contains(dimension))
 	{
 		posward.insert(dimension, pos);
-		world.value(pos).setNeg(id, dimension);
+		((ZZCell&)world.value(pos)).setNeg(id, dimension);
 		emit poswardChanged(pos, dimension);
 	}
 }
