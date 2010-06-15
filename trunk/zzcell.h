@@ -1,9 +1,10 @@
 #ifndef ZZCELL_H
 #define ZZCELL_H
 
+#include "Cell.h"
 #include <QObject>
 
-class ZZCell : public QObject
+class ZZCell : public QObject, public Cell
 {
 Q_OBJECT
 public:

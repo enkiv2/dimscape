@@ -21,6 +21,7 @@ qtsrc: Makefile.qt
 
 qtclean: Makefile.qt
 	make -f Makefile.qt clean
+	rm Makefile.qt
 
 Makefile.qt:
 	qmake qtzz.pro -o Makefile.qt
