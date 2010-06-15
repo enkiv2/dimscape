@@ -24,7 +24,10 @@ void MainWindow::newWorld()
 	world.insert(1, *(new ZZCell()));
 	world[1].setID(1);
 	world[1].setContent(*(new QString("Press i to edit me!")));
-	scene->addItem(new ZZGraphicsCell(&(world[1]), scene, (qreal)10, (QGraphicsItem*)0));
+	ZZGraphicsCell* foo=new ZZGraphicsCell(&(world[1]), scene, (qreal)10, (QGraphicsItem*)0);
+	scene->addItem(foo);
+	scene->update();
+	
 }
 
 void MainWindow::loadFile()
@@ -49,6 +52,7 @@ void MainWindow::changeEvent(QEvent *e)
         ui->retranslateUi(this);
         break;
     default:
+        //scene->update(scenesceneRect());
         break;
     }
 }
