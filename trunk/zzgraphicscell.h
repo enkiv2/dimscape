@@ -12,6 +12,7 @@
 #ifndef ZZCURRDIMS
 extern QString dx, dy, dz;
 extern cellID cursorID;
+extern int inputmode;
 #endif // ZZCURRDIMS
 
 
@@ -113,35 +114,12 @@ public:
         penThick = aThick;
     }
 
-    void myPaint(QGraphicsScene* s, int centerx, int centery, bool isCursor=false) 
+    void myPaint(QGraphicsScene* s, int mycenterx, int mycentery, bool myIsCursor=false) 
     {
-    	if (me->getID()< 0) { QString temp="+"; me->setContent(temp); }
-    	QRectF lowBox=boundingRect();
-	QGraphicsSimpleTextItem* txt = s->addSimpleText(me->getContent()/*,QFont("Times", 12, QFont::Normal)*/);
-	if(txt->boundingRect().width() > lowBox.width() || txt->boundingRect().height() > lowBox.height()) {
-		lowBox=txt->boundingRect();
-		if(lowBox.width() > lowBox.height()) { 
-			lowBox.setWidth(lowBox.height()+100);
-			lowBox.setHeight(lowBox.width());
-		} else {
-			lowBox.setHeight(lowBox.width()+100);
-			lowBox.setWidth(lowBox.height());
-		}
-	}
-	lowBox.moveCenter(QPointF((qreal)centerx, (qreal)centery));
-	QPen outline;
-	QBrush fill;
-	if(isCursor) {
-		outline=QPen(QColor::fromRgb(0, 0, 0), penThick);
-		fill=QBrush(QColor(0,0,255), Qt::SolidPattern);
-	} else {
-		outline=QPen(QColor::fromRgb(127,127,255), penThick);
-		fill=QBrush(QColor(0,0,200), Qt::SolidPattern);
-	}
-    	s->addRect(lowBox, outline, fill);
-	txt->setPos(centerx-(txt->boundingRect().width()/2), centery-(txt->boundingRect().height()/2));
-	txt->setZValue(txt->zValue()+1);
-
+	centerx=mycenterx;
+	centery=mycentery;
+	isCursor=myIsCursor;
+	s->invalidate();
     }
     void keyReleaseEvent(QKeyEvent* k);  
 
@@ -149,7 +127,8 @@ public:
 private:
     qreal penThick;
     ZZCell* me;
-    
+    int centerx, centery; 
+    bool isCursor;
 
 };
 void paintLoop(ZZGraphicsCell* cursor);
