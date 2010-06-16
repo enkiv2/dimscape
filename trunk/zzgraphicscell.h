@@ -83,7 +83,7 @@ public:
     QRectF boundingRect() const
     {
         QRectF lowBox = childrenBoundingRect();
-        return QRectF(lowBox.left()  - 100 - penThick/2, lowBox.top()  - 100 - penThick/2, lowBox.width() + 100 +  penThick, lowBox.height() + 100 +  penThick);
+        return QRectF(lowBox.left() - 50 - penThick/2, lowBox.top() - 50  - penThick/2, lowBox.width()  + 50 +  penThick, lowBox.height() + 50  +  penThick);
     }
 
     void setMe(ZZCell* foo) {
@@ -103,14 +103,35 @@ public:
         penThick = aThick;
     }
 
-    void myPaint(QGraphicsScene* s, int centerx, int centery) 
+    void myPaint(QGraphicsScene* s, int centerx, int centery, bool isCursor=false) 
     {
     	if (me->getID()< 0) { QString temp="+"; me->setContent(temp); }
     	QRectF lowBox=boundingRect();
-	lowBox.moveCenter(QPointF((qreal)centerx, (qreal)centery));
-    	s->addRect(lowBox,  QPen(QColor::fromRgb(255,255,255)), QBrush(QColor(0,0,75), Qt::SolidPattern));
 	QGraphicsSimpleTextItem* txt = s->addSimpleText(me->getContent()/*,QFont("Times", 12, QFont::Normal)*/);
-	txt->setPos(centerx, centery);
+	if(txt->boundingRect().width() > lowBox.width() || txt->boundingRect().height() > lowBox.height()) {
+		lowBox=txt->boundingRect();
+		if(lowBox.width() > lowBox.height()) { 
+			lowBox.setWidth(lowBox.height()+100);
+			lowBox.setHeight(lowBox.width());
+		} else {
+			lowBox.setHeight(lowBox.width()+100);
+			lowBox.setWidth(lowBox.height());
+		}
+	}
+	lowBox.moveCenter(QPointF((qreal)centerx, (qreal)centery));
+	QPen outline;
+	QBrush fill;
+	if(isCursor) {
+		outline=QPen(QColor::fromRgb(0, 0, 0), penThick);
+		fill=QBrush(QColor(0,0,255), Qt::SolidPattern);
+	} else {
+		outline=QPen(QColor::fromRgb(127,127,255), penThick);
+		fill=QBrush(QColor(0,0,200), Qt::SolidPattern);
+	}
+    	s->addRect(lowBox, outline, fill);
+	txt->setPos(centerx-(txt->boundingRect().width()/2), centery-(txt->boundingRect().height()/2));
+	txt->setZValue(txt->zValue()+1);
+
     }
 
 private:
@@ -121,5 +142,10 @@ private:
 };
 
 void paintCellsXBar(ZZGraphicsCell* cursor);
+
+#ifndef ZZCURRDIMS
+extern QString dx, dy, dz;
+extern cellID cursorID;
+#endif // ZZCURRDIMS
 
 #endif // ZZGRAPHICSCELL_H
