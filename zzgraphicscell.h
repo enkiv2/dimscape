@@ -7,6 +7,13 @@
 #include "Cell.h"
 #include <math.h>
 #include <QPointF>
+#include <QKeyEvent>
+
+#ifndef ZZCURRDIMS
+extern QString dx, dy, dz;
+extern cellID cursorID;
+#endif // ZZCURRDIMS
+
 
 class ZZGraphicsCell : public QGraphicsItem
 {
@@ -16,23 +23,26 @@ public:
             QGraphicsItem(aParent, aScene), penThick(1)
     {
     	me=new ZZCell();
+	setFlags(ItemIsFocusable);
 	update();
     }
     ZZGraphicsCell(QGraphicsScene* aScene, qreal aPenThick, QGraphicsItem* aParent = 0) :
             QGraphicsItem(aParent, aScene), penThick(aPenThick)
     {
     	me=new ZZCell();
+	setFlags(ItemIsFocusable);
 	update();
     }
 
-    ~ZZGraphicsCell() {
+/*    ~ZZGraphicsCell() {
     	delete me;
-    }
+    }*/
 
     ZZGraphicsCell(ZZCell* foo, QGraphicsScene* aScene, qreal aPenThick, QGraphicsItem* aParent=0) : 
     	QGraphicsItem(aParent, aScene), penThick(aPenThick) 
     {
 		me=foo;
+		setFlags(ItemIsFocusable);
 		update();
     }
     
@@ -87,7 +97,7 @@ public:
     }
 
     void setMe(ZZCell* foo) {
-    	delete me;
+    	//delete me;
     	me=foo;
     }
     ZZCell* getMe() {
@@ -133,6 +143,8 @@ public:
 	txt->setZValue(txt->zValue()+1);
 
     }
+    void keyReleaseEvent(QKeyEvent* k);  
+
 
 private:
     qreal penThick;
@@ -140,12 +152,8 @@ private:
     
 
 };
-
+void paintLoop(ZZGraphicsCell* cursor);
 void paintCellsXBar(ZZGraphicsCell* cursor);
 
-#ifndef ZZCURRDIMS
-extern QString dx, dy, dz;
-extern cellID cursorID;
-#endif // ZZCURRDIMS
 
 #endif // ZZGRAPHICSCELL_H
