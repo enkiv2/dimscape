@@ -22,7 +22,7 @@ cellID ZZSqlBackend::getRootCell()
 	{
 		loadConfig();
 	}
-	return (world.contains(2) ? world.value(2).toLongLong() : -1);
+	return (world.contains(2) ? (((ZZCell)(world.value(2))).getContent()).toLongLong() : -1);
 }
 
 void ZZSqlBackend::loadConfig()
@@ -44,10 +44,10 @@ void ZZSqlBackend::loadConfig()
 	// then posward-walk on .qtzz.config-values for
 	// each of them.
 	*/
-	q.exec("select id, pos from Connection c where 
-			c.dname = \".qtzz.config-values\" and
-			c.id = (select id from Connection ci where
-				ci.dname = \".qtzz.config-name\" or 
+	q.exec("select id, pos from Connection c where \
+			c.dname = \".qtzz.config-values\" and \
+			c.id = (select id from Connection ci where \
+				ci.dname = \".qtzz.config-name\" or \
 				ci.id = 1)");
 	while (q.next())
 	{
@@ -100,12 +100,12 @@ bool ZZSqlBackend::isSetup()
 	return false;
 }
 
-bool ZZSqlBackend::initDB(QSqlite& db)
+bool ZZSqlBackend::initDB(QString& db)
 {
 	QSqlQuery q;
 	conn.transaction();
-	q.exec("CREATE TABLE Cell (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-		type VARCHAR(100), 
+	q.exec("CREATE TABLE Cell (id INTEGER PRIMARY KEY AUTOINCREMENT, \
+		type VARCHAR(100), \
 		content BLOB)");
 	if (q.lastError().isValid())
 	{
@@ -114,15 +114,15 @@ bool ZZSqlBackend::initDB(QSqlite& db)
 		conn.rollback();
 		return false;
 	}
-	q.exec("CREATE TABLE Connection (dname TEXT,
-		id INTEGER,
-		pos INTEGER,
-		PRIMARY KEY(dname, id),
-		FOREIGN KEY(id) REFERENCES Cell
-			ON DELETE RESTRICT
-			ON UPDATE CASCADE,
-		FOREIGN KEY(pos) REFERENCES Cell(id)
-			ON DELETE RESTRICT
+	q.exec("CREATE TABLE Connection (dname TEXT, \
+		id INTEGER, \
+		pos INTEGER, \
+		PRIMARY KEY(dname, id), \
+		FOREIGN KEY(id) REFERENCES Cell \
+			ON DELETE RESTRICT \
+			ON UPDATE CASCADE, \
+		FOREIGN KEY(pos) REFERENCES Cell(id) \
+			ON DELETE RESTRICT \
 			ON UPDATE CASCADE)");
 	if (q.lastError().isValid())
 	{
@@ -219,7 +219,7 @@ bool ZZSqlBackend::batchCreateFirstCells()
 		{
 			qDebug() << "Could not load the base configuration into the database."
 				<< insertCell.lastError().text() << "\n";
-			conn.rollBack();
+		//	//conn.rollBack();
 			return false
 		}
 		if (!connectFirstCells())
@@ -249,7 +249,7 @@ bool ZZSqlBackend::createFirstCells()
 			{
 				qDebug() << "Could not load the base configuration into the database."
 					<< insertCell.lastError().text() << "\n";
-				conn.rollBack();
+		//		conn.rollBack();
 				return false;
 			} 
 		}
@@ -270,7 +270,7 @@ bool ZZSqlBackend::connectFirstCells()
 	{
 		if (!batchConnectFirstCells())
 		{
-			conn.rollBack();
+		//	conn.rollBack();
 			return false;
 		}
 		return true;
@@ -278,15 +278,17 @@ bool ZZSqlBackend::connectFirstCells()
 
 	QStringList qvdim;
 	QList<cellID> qvid, qvpos;
+	
+	qint64 pos; // ??
 
 	getFirstCellConnections(qvdim, qvid, qvpos);
 
 	QList<QString>::const_iterator dim = qvdim.constBegin();
 	QList<cellID>::const_iterator id = qvid.constBegin(), 
-		pos.constBegin();
-	for (; dim != qvdim.constEnd() &&
-		id != qvid.constEnd() &&
-		pos != qvpos.constEnd(); dim++, id++, pos++)
+		qvpos.constBegin();
+	for (; dim != (qvdim.constEnd()) &&
+		id != (qvid.constEnd()) &&
+		pos != (qvpos.constEnd()); dim++, id++, pos++)
 	{
 		insertConnection.addBindValue(*dim);
 		insertConnection.addBindValue(*id);
@@ -298,7 +300,7 @@ bool ZZSqlBackend::connectFirstCells()
 				<< "id: " << (*id)
 				<< "pos: " << (*pos) << "\n"
 				<< insertConnection.lastError().text() << "\n";
-			conn.rollBack();
+		//	conn.rollBack();
 			return false;
 		}
 	}
@@ -338,7 +340,7 @@ void ZZSqlBackend::prepareRuntimeState()
 void ZZSqlBackend::prepareStatements()
 {
 	bool ret = true;
-	ret = insertCell.prepare("insert into Cell(id, type, content)
+	ret = insertCell.prepare("insert into Cell(id, type, content) \
 			values (NULL, ?, ?)");
 	if (!ret)
 	{
@@ -357,28 +359,28 @@ void ZZSqlBackend::prepareStatements()
 		qDebug() << "Could not prepare the cell insertion query\n"
 			<< insertCell.lastError().text() << "\n";
 	}
-	ret = insertConnection.prepare("insert into Connection(dname, id, pos)
+	ret = insertConnection.prepare("insert into Connection(dname, id, pos) \
 			values (?, ?, ?)");
 	if (!ret)
 	{
 		qDebug() << "Could not prepare the connection insert query\n"
 			<< insertCell.lastError().text() << "\n";
 	}
-	ret = updateConnection.prepare("update Connection set pos = ? 
+	ret = updateConnection.prepare("update Connection set pos = ? \
 			where dname = ?, id = ?");
 	if (!ret)
 	{
 		qDebug() << "Could not prepare the connection update query\n"
 			<< insertCell.lastError().text() << "\n";
 	}
-	ret = gatherCellPos.prepare("select pos, dname from Connection 
+	ret = gatherCellPos.prepare("select pos, dname from Connection \
 			where id = ?");
 	if (!ret)
 	{
 		qDebug() << "Could not prepare the posward cell search query\n"
 			<< insertCell.lastError().text() << "\n";
 	}
-	ret = gatherCellNeg.prepare("select id, dname from Connection
+	ret = gatherCellNeg.prepare("select id, dname from Connection \
 			where pos = ?");
 	if (!ret)
 	{
@@ -409,7 +411,7 @@ bool ZZSqlBackend::loadCells(QList<cellID>& cids)
 bool ZZSqlBackend::loadCell(cellID cid)
 {
 	if (world.contains(cid) && 
-		world.value(cid).getType() != -1)
+		((ZZCell)world.value(cid)).getType() != -1)
 	{
 		return true;
 	}
@@ -421,9 +423,11 @@ bool ZZSqlBackend::loadCell(cellID cid)
 		return false;
 	}
 	getCell.next(); // queue up our cell
-
-	ZZCell tempCell(cid, getCell.value(1).toString(),
-			getCell.value(2).toString());
+	
+	QString foo=getCell.value(2).toString();
+	QString& bar=foo;
+	ZZCell tempCell((qint64)cid, getCell.value(1).toInt(),
+			bar);
 	
 	getCell.finish();
 
@@ -443,17 +447,19 @@ bool ZZSqlBackend::loadCell(cellID cid)
 
 bool ZZSqlBackend::gatherIds(QSqlQuery& dir, ZZCell& tempCell)
 {
-	dir.addBindValue(tempCell.getId());
+	dir.addBindValue(tempCell.getID());
 	if (!dir.exec())
 	{
-		qDebug() << "Could not load connections from cell: " << cid << "\n"
+		qDebug() << "Could not load connections from cell: " << tempCell.getID() << "\n"
 			<< dir.lastError().text() << "\n";
 		return false;
 	}
 	while (dir.next())
 	{
-		tempCell.setPos(dir.value(0).toLongLong(),
-				dir.value(1).toString());
+		QString foo=dir.value(1).toString();
+		QString& bar=foo;
+		tempCell.setPos((qint64)(dir.value(0).toLongLong()),
+				bar);
 	}
 	dir.finish();
 	return true;
