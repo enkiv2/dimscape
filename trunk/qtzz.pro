@@ -2,7 +2,6 @@
 # Project created by QtCreator 2010-01-16T15:37:24
 # -------------------------------------------------
 QT += webkit \
-    phonon \
     multimedia \
     sql
 TARGET = qtzz
