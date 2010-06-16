@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include <Qt/qpainter.h>
 #include "Cell.h"
+#include <math.h>
+#include <QPointF>
 
 class ZZGraphicsCell : public QGraphicsItem
 {
@@ -81,12 +83,15 @@ public:
     QRectF boundingRect() const
     {
         QRectF lowBox = childrenBoundingRect();
-        return QRectF(lowBox.left()  - penThick/2, lowBox.top()  - penThick/2, lowBox.width() +  penThick, lowBox.height() +  penThick);
+        return QRectF(lowBox.left()  - 100 - penThick/2, lowBox.top()  - 100 - penThick/2, lowBox.width() + 100 +  penThick, lowBox.height() + 100 +  penThick);
     }
 
     void setMe(ZZCell* foo) {
     	delete me;
     	me=foo;
+    }
+    ZZCell* getMe() {
+    	return me;
     }
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     int getPenThick() const
@@ -100,8 +105,10 @@ public:
 
     void myPaint(QGraphicsScene* s, int centerx, int centery) 
     {
+    	if (me->getID()< 0) { QString temp="+"; me->setContent(temp); }
     	QRectF lowBox=boundingRect();
-    	s->addRect(centerx - lowBox.right()/2, centery - lowBox.bottom()/2, centerx + lowBox.right()/2, centery + lowBox.bottom()/2,  QPen(QColor::fromRgb(255,255,255)), QBrush(QColor(0,100,100), Qt::SolidPattern));
+	lowBox.moveCenter(QPointF((qreal)centerx, (qreal)centery));
+    	s->addRect(lowBox,  QPen(QColor::fromRgb(255,255,255)), QBrush(QColor(0,0,75), Qt::SolidPattern));
 	QGraphicsSimpleTextItem* txt = s->addSimpleText(me->getContent()/*,QFont("Times", 12, QFont::Normal)*/);
 	txt->setPos(centerx, centery);
     }
@@ -112,5 +119,7 @@ private:
     
 
 };
+
+void paintCellsXBar(ZZGraphicsCell* cursor);
 
 #endif // ZZGRAPHICSCELL_H

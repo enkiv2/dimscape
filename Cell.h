@@ -24,6 +24,8 @@ class ZZCell : public QObject {
 	QString getContent();
 	cellID getPos(QString& dimension);
 	cellID getNeg(QString& dimension);
+	cellID getPos(char* dimension) { QString temp=dimension; return getPos(temp); }
+	cellID getNeg(char* dimension) { QString temp=dimension; return getNeg(temp); }
 	int getType();
 	cellID getID();
 	void setID(cellID myId);
