@@ -20,6 +20,7 @@ class ZZCell : public QObject {
 	
 	public:
 	ZZCell();
+	ZZCell(cellID cid, int ctype, QString& cont);
 	ZZCell(const ZZCell& simulacrum);
 	QString getContent();
 	cellID getPos(QString& dimension);
@@ -65,10 +66,7 @@ class ZZCell : public QObject {
 
 };
 
-#ifndef ZZWORLD
-#define ZZWORLD
 extern QHash<cellID,ZZCell> world; /* this should include all cells */
-#endif
 
 #endif
 
