@@ -67,7 +67,12 @@ void ZZGraphicsCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 {
 	if (me->getID()< 0) { QString temp="+"; me->setContent(temp); }
 	QRectF lowBox=boundingRect();
-	QGraphicsSimpleTextItem* txt = new QGraphicsSimpleTextItem(me->getContent()/*,QFont("Times", 12, QFont::Normal)*/);
+	QGraphicsSimpleTextItem* txt;
+	if(inputMode) {
+		txt=new QGraphicsSimpleTextItem(currentString);
+	} else {
+		 txt = new QGraphicsSimpleTextItem(me->getContent());
+	}
 	if(txt->boundingRect().width() > lowBox.width() || txt->boundingRect().height() > lowBox.height()) {
 		lowBox=txt->boundingRect();
 		if(lowBox.width() > lowBox.height()) {
@@ -91,7 +96,7 @@ void ZZGraphicsCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 	painter->setPen(outline);
 	painter->fillRect(lowBox, fill);
 	painter->drawRect(lowBox);
-	painter->drawText(centerx-(txt->boundingRect().width()/2), centery-(txt->boundingRect().height()/2), me->getContent());
+	painter->drawText(centerx-(txt->boundingRect().width()/2), centery-(txt->boundingRect().height()/2), txt->text());
 }
 
 void paintLoop(ZZGraphicsCell* cursor) {
