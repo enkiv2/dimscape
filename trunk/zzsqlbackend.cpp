@@ -29,20 +29,30 @@ void ZZSqlBackend::loadConfig()
 {
 	QList<cellID> cids;
 	QSqlQuery q;
-	// Again, bad constant, better way should be
+	/* Again, bad constant, better way should be
 	// found, since the user may wish to attach
 	// comments to config-names or config-values
 	// and we don't want our sweep here to wind up
 	// grabbing the whole database or some such
-	q.exec("select pos as id from Connection where 
-			dname = \".qtzz.config-values\"
-		intersect
-		select id from Connection where
-			dname = \".qtzz.config-name\" or 
-			id = 1");
+	// This mode breaks at least:
+	// -> .qtzz.config-values 
+	// V .qtzz.config-name
+	// "Background color RGB" -- 0 -- 255 -- 240
+	// 
+	// TODO: A new approach. Load only those cells
+	// connected posward on .qtzz.config-name,
+	// then posward-walk on .qtzz.config-values for
+	// each of them.
+	*/
+	q.exec("select id, pos from Connection c where 
+			c.dname = \".qtzz.config-values\" and
+			c.id = (select id from Connection ci where
+				ci.dname = \".qtzz.config-name\" or 
+				ci.id = 1)");
 	while (q.next())
 	{
-		cids << q.value(0).toLongLong();
+		cids << q.value(0).toLongLong()
+			<< q.value(1).toLongLong();
 	}
 	loadCells(cids);
 }
