@@ -12,7 +12,7 @@ class ZZSqlBackend : public QObject
 	public:
 		ZZSqlBackend(QString& db);
 		cellID getRootCell();
-		bool loadConfig();
+		void loadConfig();
 		bool loadCells(QList<cellID>& list);
 		bool loadCell(cellID cell);
 
@@ -23,7 +23,7 @@ class ZZSqlBackend : public QObject
 		bool initDB(QString& db);
 		void setupDB();
 		bool isSetup();
-		void gatherIds(QSqlQuery& dir, ZZCell& tempCell);
+		bool gatherIds(QSqlQuery& dir, ZZCell& tempCell);
 		bool fillDB();
 		bool batchCreateFirstCells(); 
 		bool createFirstCells();
