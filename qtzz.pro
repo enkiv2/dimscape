@@ -10,11 +10,11 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     zzspace.cpp \
     zzgraphicscell.cpp \
-    Cell.cpp
+    Cell.cpp 
 HEADERS += mainwindow.h \
     zzspace.h \
     zzgraphicscell.h \
-    Cell.h
+    Cell.h 
 FORMS += mainwindow.ui
 CONFIG += link_pkgconfig debug
 # PKGCONFIG += yaml-cpp

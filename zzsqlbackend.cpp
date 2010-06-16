@@ -219,7 +219,7 @@ bool ZZSqlBackend::batchCreateFirstCells()
 		{
 			qDebug() << "Could not load the base configuration into the database."
 				<< insertCell.lastError().text() << "\n";
-		//	//conn.rollBack();
+			conn.rollback();
 			return false
 		}
 		if (!connectFirstCells())
@@ -249,7 +249,7 @@ bool ZZSqlBackend::createFirstCells()
 			{
 				qDebug() << "Could not load the base configuration into the database."
 					<< insertCell.lastError().text() << "\n";
-		//		conn.rollBack();
+				conn.rollback();
 				return false;
 			} 
 		}
@@ -270,7 +270,7 @@ bool ZZSqlBackend::connectFirstCells()
 	{
 		if (!batchConnectFirstCells())
 		{
-		//	conn.rollBack();
+			conn.rollback();
 			return false;
 		}
 		return true;
@@ -279,13 +279,11 @@ bool ZZSqlBackend::connectFirstCells()
 	QStringList qvdim;
 	QList<cellID> qvid, qvpos;
 	
-	qint64 pos; // ??
-
 	getFirstCellConnections(qvdim, qvid, qvpos);
 
 	QList<QString>::const_iterator dim = qvdim.constBegin();
 	QList<cellID>::const_iterator id = qvid.constBegin(), 
-		qvpos.constBegin();
+		pos = qvpos.constBegin();
 	for (; dim != (qvdim.constEnd()) &&
 		id != (qvid.constEnd()) &&
 		pos != (qvpos.constEnd()); dim++, id++, pos++)
@@ -300,7 +298,7 @@ bool ZZSqlBackend::connectFirstCells()
 				<< "id: " << (*id)
 				<< "pos: " << (*pos) << "\n"
 				<< insertConnection.lastError().text() << "\n";
-		//	conn.rollBack();
+			conn.rollback();
 			return false;
 		}
 	}
@@ -425,9 +423,8 @@ bool ZZSqlBackend::loadCell(cellID cid)
 	getCell.next(); // queue up our cell
 	
 	QString foo=getCell.value(2).toString();
-	QString& bar=foo;
 	ZZCell tempCell((qint64)cid, getCell.value(1).toInt(),
-			bar);
+			foo);
 	
 	getCell.finish();
 
@@ -457,13 +454,10 @@ bool ZZSqlBackend::gatherIds(QSqlQuery& dir, ZZCell& tempCell)
 	while (dir.next())
 	{
 		QString foo=dir.value(1).toString();
-		QString& bar=foo;
 		tempCell.setPos((qint64)(dir.value(0).toLongLong()),
-				bar);
+				foo);
 	}
 	dir.finish();
 	return true;
 }
 	
-
-}
