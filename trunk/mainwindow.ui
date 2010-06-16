@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QtZZ</string>
+   <string>DimScape</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">

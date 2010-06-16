@@ -11,11 +11,22 @@ void ZZGraphicsCell::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 }
 
 void paintCellsXBar(ZZGraphicsCell* cursor) {
+	if(dx==QString()) {
+		dx=QString("dx");
+	}
+	if(dy==QString()) {
+		dy=QString("dy");
+	}
+	if(dz==QString()) {
+		dz=QString("dz");
+	}
 	ZZGraphicsCell* posx=(new ZZGraphicsCell(&world[cursor->getMe()->getPos(dx)], cursor->scene(), (qreal)5, (QGraphicsItem*)cursor));
 	ZZGraphicsCell* posy=(new ZZGraphicsCell(&world[cursor->getMe()->getPos(dy)], cursor->scene(), (qreal)5, (QGraphicsItem*)cursor));
 	ZZGraphicsCell* negx=(new ZZGraphicsCell(&world[cursor->getMe()->getNeg(dx)], cursor->scene(), (qreal)5, (QGraphicsItem*)cursor));
 	ZZGraphicsCell* negy=(new ZZGraphicsCell(&world[cursor->getMe()->getNeg(dy)], cursor->scene(), (qreal)5, (QGraphicsItem*)cursor));
 	QRectF sr=cursor->scene()->sceneRect();
+	cursor->scene()->addRect(0, 0, sr.width()/8, sr.height()/8, QPen(QColor::fromRgb(0, 0, 0), 3), QBrush(QColor(0,0,200), Qt::SolidPattern));
+	cursor->scene()->addSimpleText("dx: "+dx+"\ndy: "+dy+"\ndz: "+dz);
 	negx->myPaint(negx->scene(), sr.left(), sr.height()/2);
 	negy->myPaint(negy->scene(), sr.width()/2, sr.top());
 	posx->myPaint(posx->scene(), (sr.width()*3)/4, sr.height()/2);
