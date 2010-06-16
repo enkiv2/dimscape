@@ -2,6 +2,7 @@
 #define ZZGRAPHICSCELL_H
 
 #include <QGraphicsItem>
+#include <QGraphicsScene>
 #include <Qt/qpainter.h>
 #include "Cell.h"
 
@@ -80,7 +81,7 @@ public:
     QRectF boundingRect() const
     {
         QRectF lowBox = childrenBoundingRect();
-        return QRectF(lowBox.left()  - penThick/2, lowBox.top()  - penThick/2, lowBox.width() + 250 + penThick, lowBox.height() + 250 + penThick);
+        return QRectF(lowBox.left()  - penThick/2, lowBox.top()  - penThick/2, lowBox.width() +  penThick, lowBox.height() +  penThick);
     }
 
     void setMe(ZZCell* foo) {
@@ -95,6 +96,14 @@ public:
     void setPenThick(int aThick)
     {
         penThick = aThick;
+    }
+
+    void myPaint(QGraphicsScene* s, int centerx, int centery) 
+    {
+    	QRectF lowBox=boundingRect();
+    	s->addRect(centerx - lowBox.right()/2, centery - lowBox.bottom()/2, centerx + lowBox.right()/2, centery + lowBox.bottom()/2,  QPen(QColor::fromRgb(255,255,255)), QBrush(QColor(0,100,100), Qt::SolidPattern));
+	QGraphicsSimpleTextItem* txt = s->addSimpleText(me->getContent()/*,QFont("Times", 12, QFont::Normal)*/);
+	txt->setPos(centerx, centery);
     }
 
 private:

@@ -32,6 +32,7 @@ void MainWindow::newWorld()
 	scene->update();
         foo->update();
 	ui->zzViewWidget->show();
+	foo->myPaint(scene, 200, 200);
 }
 
 void MainWindow::loadFile()
