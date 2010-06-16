@@ -34,8 +34,9 @@ void MainWindow::newWorld()
 	scene->update();
         foo->update();
 	ui->zzViewWidget->show();
+	cursorID=1;
 	//foo->myPaint(scene, 200, 200);
-	paintCellsXBar(foo);
+	paintLoop(foo);
 }
 
 void MainWindow::loadFile()
