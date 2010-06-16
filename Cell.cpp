@@ -1,6 +1,5 @@
 #include <Cell.h>
 
-#define ZZWORLD
 QHash<cellID,ZZCell> world;
 
 ZZCell::ZZCell(const ZZCell& simulacrum) {
@@ -23,6 +22,14 @@ ZZCell::ZZCell() { // default constructor
 	type=0;
 	id=-1; /* if this is -1 then the cell is uninitialized. This is very useful for transparency with the database */
 }
+
+ZZCell::ZZCell(cellID cid, int ctype, QString& cont)
+{
+	content = cont;
+	type = ctype;
+	id = cid;
+}
+
 
 void ZZCell::setContent(QString& cont) {
 	// a bit dangerous not having a guard here
