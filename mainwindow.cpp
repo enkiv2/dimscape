@@ -43,7 +43,7 @@ void MainWindow::loadFile()
         QGraphicsSimpleTextItem* txt;
         scene->addRect(0, 0, 250, 200, QPen(QColor::fromRgb(255,255,255)), QBrush(QColor(0,100,100), Qt::SolidPattern));
         scene->addRect(0, 260, 250, 200, QPen(QColor::fromRgb(255,255,255)), QBrush(QColor(0,100,100), Qt::SolidPattern));
-        txt = scene->addSimpleText(fileName,QFont("Times", 12, QFont::Normal));
+        txt = scene->addSimpleText(fileName/*,QFont("Times", 12, QFont::Normal)*/);
         txt->setPos(0, 520);
     }
 }
