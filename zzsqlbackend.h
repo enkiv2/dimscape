@@ -20,7 +20,7 @@ class ZZSqlBackend : public QObject
 		void prepareStatements();
 		void prepareRuntimeState();
 		void openConnection(QString& db);
-		bool initDB(QString& db);
+		bool initDB();
 		void setupDB();
 		bool isSetup();
 		bool gatherIds(QSqlQuery& dir, ZZCell& tempCell);
