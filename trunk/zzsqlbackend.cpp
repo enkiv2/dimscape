@@ -77,7 +77,7 @@ void ZZSqlBackend::setupDB()
 	{
 		if (!isSetup())
 		{
-			initDB(db);
+			initDB();
 		}
 		// if we can work with the db, select succeeds,
 		// and there happens to be nothing in Cell, 
@@ -100,7 +100,7 @@ bool ZZSqlBackend::isSetup()
 	return false;
 }
 
-bool ZZSqlBackend::initDB(QString& db)
+bool ZZSqlBackend::initDB()
 {
 	QSqlQuery q;
 	conn.transaction();
@@ -109,7 +109,7 @@ bool ZZSqlBackend::initDB(QString& db)
 		content BLOB)");
 	if (q.lastError().isValid())
 	{
-		qDebug() << "Could not create Cell table in database: " << db 
+		qDebug() << "Could not create Cell table in database." 
 			<< "\n" << q.lastError().text() << "\n";
 		conn.rollback();
 		return false;
@@ -126,7 +126,7 @@ bool ZZSqlBackend::initDB(QString& db)
 			ON UPDATE CASCADE)");
 	if (q.lastError().isValid())
 	{
-		qDebug() << "Could not create Connections table in database: " << db 
+		qDebug() << "Could not create Connections table in database."
 			<< "\n" << q.lastError().text() << "\n";
 		conn.rollback();
 		return false;
@@ -188,14 +188,14 @@ static void getFirstCellConnections(T& qvdim, U& qvid, U& qvpos)
 	for (int i = 1; i <= 5; i+=2)
 	{
 		qvdim << ".qtzz.config-name";
-		qvid << Q_INT64_C((i));
-		qpos << Q_INT64_C((i+2));
+		qvid << i;
+		qvpos << (i+2);
 	}
 	for (int i = 1; i <= 7; i+=2)
 	{
 		qvdim << ".qtzz.config-values";
-		qvid << Q_INT64_C((i));
-		qpos << Q_INT64_C((i+1));
+		qvid << i;
+		qvpos << (i+1);
 
 	}
 	qvdim << ".x";
@@ -220,7 +220,7 @@ bool ZZSqlBackend::batchCreateFirstCells()
 			qDebug() << "Could not load the base configuration into the database."
 				<< insertCell.lastError().text() << "\n";
 			conn.rollback();
-			return false
+			return false;
 		}
 		if (!connectFirstCells())
 		{
@@ -306,7 +306,7 @@ bool ZZSqlBackend::connectFirstCells()
 	return true;
 }
 
-bool batchConnectFirstCells()
+bool ZZSqlBackend::batchConnectFirstCells()
 {
 	QVariantList qvdim, qvid, qvpos;
 	
@@ -316,9 +316,9 @@ bool batchConnectFirstCells()
 	insertConnection.addBindValue(qvid);
 	insertConnection.addBindValue(qvpos);
 
-	if (!insertConnection.batchExec())
+	if (!insertConnection.execBatch())
 	{
-		qDebug << "Could not insert the connections between the first cells.\n"
+		qDebug() << "Could not insert the connections between the first cells.\n"
 			<< insertConnection.lastError().text() << "\n";
 		return false;
 	}
