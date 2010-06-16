@@ -9,12 +9,10 @@ TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
     zzspace.cpp \
-    zzsqlbackend.cpp \
     zzgraphicscell.cpp \
     Cell.cpp
 HEADERS += mainwindow.h \
     zzspace.h \
-    zzsqlbackend.h \
     zzgraphicscell.h \
     Cell.h
 FORMS += mainwindow.ui

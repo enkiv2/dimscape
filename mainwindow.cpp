@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
+    scene->setSceneRect(QRectF(0, 0, 800, 600));
+    ui->zzViewWidget->fitInView(scene->sceneRect());
     ui->zzViewWidget->setScene(scene);
 }
 
@@ -26,7 +28,7 @@ void MainWindow::newWorld()
 	world.insert(1, *(new ZZCell()));
 	world[1].setID(1);
 	world[1].setContent(*(new QString("Press i to edit me!")));
-	ZZGraphicsCell* foo=new ZZGraphicsCell(&(world[1]), scene, (qreal)10, (QGraphicsItem*)0);
+	ZZGraphicsCell* foo=new ZZGraphicsCell(&(world[1]), scene, (qreal)5, (QGraphicsItem*)0);
 	scene->addItem(foo);
 	foo->setZValue(2);
 	scene->update();
