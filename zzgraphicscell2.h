@@ -4,7 +4,7 @@
 #include <QGraphicsRectItem>
 #include <QList>
 
-#include "Cell.h"
+#include "lib/ZZCell.h"
 
 
 class ZZGraphicsCell2 : public QGraphicsRectItem

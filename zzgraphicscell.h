@@ -4,7 +4,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <Qt/qpainter.h>
-#include "Cell.h"
+#include "lib/ZZCell.h"
 #include <math.h>
 #include <QPointF>
 #include <QKeyEvent>
