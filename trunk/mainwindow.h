@@ -17,6 +17,7 @@ public:
 public slots:
     void loadFile();
     void newWorld();
+    void newCellTest();
 protected:
     void changeEvent(QEvent *e);
 
