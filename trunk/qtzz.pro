@@ -10,13 +10,13 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     zzspace.cpp \
     zzgraphicscell.cpp \
-    Cell.cpp \
-    zzsqlbackend.cpp
+    lib/ZZCell.cpp \
+    backends/zzsqlbackend.cpp
 HEADERS += mainwindow.h \
     zzspace.h \
     zzgraphicscell.h \
     lib/ZZCell.h \
-    zzsqlbackend.h
+    backends/zzsqlbackend.h
 FORMS += mainwindow.ui
 CONFIG += link_pkgconfig debug
 # PKGCONFIG += yaml-cpp
