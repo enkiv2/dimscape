@@ -15,7 +15,7 @@ SOURCES += main.cpp \
 HEADERS += mainwindow.h \
     zzspace.h \
     zzgraphicscell.h \
-    Cell.h \
+    lib/ZZCell.h \
     zzsqlbackend.h
 FORMS += mainwindow.ui
 CONFIG += link_pkgconfig debug

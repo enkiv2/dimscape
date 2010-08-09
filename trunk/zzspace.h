@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QGraphicsView>
 #include <QHash>
-#include "Cell.h"
+#include "lib/ZZCell.h"
 #include "zzgraphicscell.h"
 
 class ZZSpace : public QObject

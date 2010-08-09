@@ -1,4 +1,4 @@
-#include <Cell.h>
+#include <lib/ZZCell.h>
 
 QHash<cellID,ZZCell> world;
 

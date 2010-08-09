@@ -7,7 +7,7 @@
  #include <QQueue>
  #include <QThread>
  #include <QWaitCondition>
- #include "Cell.h"
+ #include "lib/ZZCell.h"
 
  class ZZGraphWalker : public QThread
  {

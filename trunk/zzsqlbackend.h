@@ -4,7 +4,7 @@
 #include <QtSql>
 #include <QList>
 
-#include "Cell.h"
+#include "lib/ZZCell.h"
 
 class ZZSqlBackend : public QObject
 {
