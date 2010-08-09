@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QGraphicsSimpleTextItem>
+#include <QGraphicsRectItem>
+#include <QGraphicsTextItem>
 #include <QFileDialog>
 #include "zzgraphicscell.h"
 #include <QDebug>
@@ -11,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
-    scene->setSceneRect(QRectF(0, 0, 800, 600));
+    scene->setSceneRect(QRectF(0, 0, 1024, 768));
     ui->zzViewWidget->fitInView(scene->sceneRect());
     ui->zzViewWidget->setScene(scene);
 }
@@ -39,8 +41,50 @@ void MainWindow::newWorld()
 	paintLoop(foo);
 }
 
+void MainWindow::newCellTest()
+{
+	QString rts("root"), rrts("right of root and quite long at that"), 
+		lrts("left of root");
+	ZZCell rt((cellID)1, 0, rts),
+	       rrt((cellID)2, 0, rrts),
+	       lrt((cellID)3, 0, lrts);
+	
+	// QHash should make a copy for us
+	// since these guys will be dead soon
+	
+	world.insert(1, rt);
+	world.insert(2, rrt);
+	world.insert(3, lrt);
+
+	// Construct our top-level squares
+	
+	QGraphicsRectItem *rt_rect = new QGraphicsRectItem(0,0,100,20), 
+			  *rrt_rect = new QGraphicsRectItem(0,0,100,20), 
+			  *lrt_rect = new QGraphicsRectItem(0,0,100,20);
+
+	QGraphicsTextItem *rt_text = new QGraphicsTextItem(rt.getContent(), rt_rect),
+			  *rrt_text = new QGraphicsTextItem(rrt.getContent(), rrt_rect),
+			  *lrt_text = new QGraphicsTextItem(lrt.getContent(), lrt_rect);
+
+
+	rt_rect->setPos(420, 420);
+	rrt_rect->setPos(530, 420);
+	lrt_rect->setPos(310, 420);
+
+	// Add our toplevel squares to our scene
+
+	scene->addItem(rt_rect);
+	scene->addItem(rrt_rect);
+	scene->addItem(lrt_rect);
+	
+	scene->update();
+	ui->zzViewWidget->show();
+}
+	
+
 void MainWindow::loadFile()
 {
+	newCellTest();
     // TODO: take this out entirely
 /*
     QString fileName = QFileDialog::getOpenFileName(this,tr("Load ZigZag datafile"),
