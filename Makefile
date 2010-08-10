@@ -1,7 +1,7 @@
 all:  src
 
 clean:
-	rm -f *.o Makefile.qt */Makefile.qt qtzz dimscape
+	rm -f *.o Makefile.qt */Makefile.qt qtzz dimscape */*.so */*.a */*.so.*
 
 src:  qtsrc
 
