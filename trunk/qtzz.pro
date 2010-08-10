@@ -1,10 +1,11 @@
 # -------------------------------------------------
 # Project created by QtCreator 2010-01-16T15:37:24
 # -------------------------------------------------
+CONFIG += ordered
 TEMPLATE = subdirs
-SUBDIRS += backends \
-	frontends \ 
-	lib
+SUBDIRS += lib \
+	backends \
+	frontends 
 CONFIG += link_pkgconfig debug
 MAKEFILE = Makefile.qt
 # PKGCONFIG += yaml-cpp
