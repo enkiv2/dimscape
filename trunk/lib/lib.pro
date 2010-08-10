@@ -1,4 +1,5 @@
 QT -= gui
+MAKEFILE = Makefile.qt
 CONFIG += qt dll
 TARGET = zz
 TEMPLATE = lib

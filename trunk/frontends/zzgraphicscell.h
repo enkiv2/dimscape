@@ -9,7 +9,7 @@
 #include <QGraphicsRectItem>
 #include <QList>
 
-#include "lib/ZZCell.h"
+#include <lib/ZZCell.h>
 
 
 class ZZGraphicsCell : public QGraphicsRectItem
