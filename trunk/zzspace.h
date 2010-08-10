@@ -1,3 +1,7 @@
+/* zzspace.h
+ * (c) 2010 Jonathan Kopetz
+ * Licensed under the GNU GPL v.3
+ */
 #ifndef ZZSPACE_H
 #define ZZSPACE_H
 
