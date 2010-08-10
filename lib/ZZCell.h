@@ -13,7 +13,7 @@
 #include <Qt/qstring.h>
 
 #define cellID qint64
-static enum cell_dir { NEGWARD, POSWARD, BOTHWARD };
+enum cell_dir { NEGWARD, POSWARD, BOTHWARD };
 
 class ZZCell : public QObject {
 	Q_OBJECT

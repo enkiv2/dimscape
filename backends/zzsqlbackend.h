@@ -29,7 +29,7 @@ class ZZSqlBackend : public QObject
 		bool initDB();
 		void setupDB();
 		bool isSetup();
-		bool gatherIds(QSqlQuery& dir, ZZCell& tempCell);
+		bool gatherIds(QSqlQuery& q, ZZCell& tempCell, cell_dir dir);
 		bool fillDB();
 		bool batchCreateFirstCells(); 
 		bool createFirstCells();
