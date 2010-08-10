@@ -16,24 +16,30 @@ class ZZGraphicsCell : public QGraphicsRectItem
 {
 
 public:
+    ZZGraphicsCell(qreal thick, ZZCell& moi)
+    {
+    	me=moi;
+	setFlags(ItemIsFocusable);
+	update();
+    }
     ZZGraphicsCell(QGraphicsItem* aParent = 0) :
             QGraphicsRectItem(aParent), penThick(1)
     {
-    	me=new ZZCell();
+    	me=ZZCell();
 	setFlags(ItemIsFocusable);
 	update();
     }
     ZZGraphicsCell(QRectF& aRect, QGraphicsItem* aParent = 0) :
             QGraphicsRectItem(aRect,aParent)
     {
-    	me=new ZZCell();
+    	me=ZZCell();
 	setFlags(ItemIsFocusable);
 	update();
     }
 
     int type ()
     {
-    	return UserType+(*me).getType();
+    	return UserType+(me).getType();
     }
     
     QRectF boundingRect() const
@@ -54,6 +60,7 @@ public:
     }
 
 private:
+    ZZCell me;
     qreal penThick;
 
 };

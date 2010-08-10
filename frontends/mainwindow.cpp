@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include "zzgraphicscell.h"
 #include <QDebug>
+int cursorID;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,15 +31,15 @@ void MainWindow::newWorld()
 	world.insert(1, *(new ZZCell()));
 	world[1].setID(1);
 	world[1].setContent(*(new QString("Press i to edit me!")));
-	ZZGraphicsCell* foo=new ZZGraphicsCell(&(world[1]), scene, (qreal)5, (QGraphicsItem*)0);
+	ZZGraphicsCell* foo=new ZZGraphicsCell(qreal(5), (world[1]));
 	scene->addItem(foo);
 	foo->setZValue(2);
 	scene->update();
         foo->update();
 	ui->zzViewWidget->show();
 	cursorID=1;
-	//foo->myPaint(scene, 200, 200);
-	paintLoop(foo);
+	//foo->paint(scene, 200, 200);
+	//paintLoop(foo);
 }
 
 void MainWindow::newCellTest()
