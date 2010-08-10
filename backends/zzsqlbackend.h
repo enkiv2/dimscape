@@ -8,6 +8,7 @@
 
 #include <QtSql>
 #include <QList>
+#include <QDebug>
 
 #include "lib/ZZCell.h"
 
