@@ -2,8 +2,7 @@
 # Project created by QtCreator 2010-01-16T15:37:24
 # -------------------------------------------------
 QT += webkit \
-    multimedia \
-    sql
+    multimedia 
 TARGET = qtzz
 DESTDIR = ../
 TEMPLATE = app

@@ -1,3 +1,4 @@
+QT -= gui
 CONFIG += qt dll
 TARGET = zz
 TEMPLATE = lib
