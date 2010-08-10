@@ -1,7 +1,7 @@
 all:  src
 
-clean: 
-	rm -f *.o Makefile.qt qtzz dimscape
+clean:
+	rm -f *.o Makefile.qt */Makefile.qt qtzz dimscape
 
 src:  qtsrc
 
@@ -23,6 +23,9 @@ qtsrc: Makefile.qt
 
 qtclean: Makefile.qt
 	make -f Makefile.qt clean
+	make -f lib/Makefile.qt clean
+	make -f backends/Makefile.qt clean
+	make -f frontends/Makefile.qt clean
 
 Makefile.qt: FORCE
 	qmake qtzz.pro CONFIG=sql-backend
