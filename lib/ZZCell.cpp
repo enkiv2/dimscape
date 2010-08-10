@@ -41,8 +41,10 @@ void ZZCell::setContent(QString& cont) {
 	// due to potential cyclical slot/signal signal/slot
 	// but, a full-text comparison check seems a bit much,
 	// maybe for a debug build
-	content=cont;
-	emit contentChanged(cont);
+	if(content!=cont) { // take this guard out if it's too slow
+		content=cont;
+		emit contentChanged(cont);
+	}
 }
 
 QString ZZCell::getContent() {
