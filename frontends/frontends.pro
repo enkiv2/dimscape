@@ -5,20 +5,17 @@ QT += webkit \
     multimedia \
     sql
 TARGET = qtzz
-TEMPLATE = subdirs
-SUBDIRS += backends \
-	lib
+DESTDIR = ../
+TEMPLATE = app
+LIBS += -lzz -L../lib \
+	-lbackend -L../backends
 SOURCES += main.cpp \
     mainwindow.cpp \
     zzspace.cpp \
-    zzgraphicscell.cpp \
-    lib/ZZCell.cpp \
-    backends/zzsqlbackend.cpp
+    zzgraphicscell.cpp
 HEADERS += mainwindow.h \
     zzspace.h \
-    zzgraphicscell.h \
-    lib/ZZCell.h \
-    backends/zzsqlbackend.h
+    zzgraphicscell.h 
 FORMS += mainwindow.ui
 CONFIG += link_pkgconfig debug
 # PKGCONFIG += yaml-cpp
