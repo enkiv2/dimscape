@@ -1,3 +1,8 @@
+/* zzsqlbackend.h
+ * (c) 2010 Jonathan Kopetz
+ * Licensed under the GNU GPL v.3
+ */
+
 #ifndef ZZSQLBACKEND_H
 #define ZZSQLBACKEND_H
 

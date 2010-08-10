@@ -1,4 +1,4 @@
-/* dscell.h - headers for the zz cell
+/* ZZCell.h - headers for the zz cell
  * (c) 2010 John Ohno
  * Licensed under the GNU GPL v.3
  * Part of the DimScape project
