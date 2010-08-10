@@ -1,7 +1,9 @@
 CONFIG += qt staticlib
 TARGET = backend
 TEMPLATE = lib
-HEADERS += zzbackend.h
+INCLUDEPATH += ../
+HEADERS += zzbackend.h \
+	ZZCell.h
 sql-backend {
 	SOURCES += zzsqlbackend.cpp
 	HEADERS +=	zzsqlbackend.h
