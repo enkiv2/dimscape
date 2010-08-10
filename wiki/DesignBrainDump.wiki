@@ -13,6 +13,26 @@ We will load cell content from database as-needed.
 
 If we change the negward link on a rendered cell such that it links to an already existent but not loaded cell, we will have some trouble. In this corner case we will need to load this cell before doing the link stuff.
 
+= Modularity =
+
+==Lib==
+
+The ZZ Cell implementation, the ZZ Graph Walker, and an abstract ZZ Backend that Graph Walker uses. The Graph Walker MAY also walk a list of ZZ Cell's in lieu of a backend. The dynamic library is currently libzz.so
+
+==Backends==
+
+Depends on libzz for the ZZ Cell implementation.
+
+Currently only a SQL backend is being implemented. Any number of which are possible, and any number may be linked in at compile time. The dynamic library will be libzzbackend-sql.so.
+
+==Frontends==
+
+Depends on libzz and at least one Backend.
+
+Currently only a Qt GUI is in progress. 
+
+A Cache Manager will cache QSharedPointers of both ZZ Cells and ZZ Graphics Cells. It will manage dirty cells and write changes back to the Backend every five seconds, or through an explicit flush. The cache MAY be bypassed in the case of an in-memory Backend.
+
 = UI =
 
 Modes:
