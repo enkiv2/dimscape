@@ -11,7 +11,8 @@ cellsrc:
 dist:
 	tar -cz ../dimscape > ../dimscape-`date +%F`.tgz
 
-commit:
+commit: 
+	svn update
 	svn commit
 
 update:
