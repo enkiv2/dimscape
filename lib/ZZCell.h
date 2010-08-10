@@ -19,7 +19,7 @@ class ZZCell : public QObject {
 	Q_OBJECT
 	
 	public:
-	enum cell_dir { NEGWARD, POSWARD, BOTHWARD };
+	static enum cell_dir { NEGWARD, POSWARD, BOTHWARD };
 	ZZCell();
 	ZZCell(cellID cid, int ctype, QString& cont);
 	ZZCell(const ZZCell& simulacrum);
