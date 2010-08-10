@@ -11,7 +11,8 @@
  #include <QQueue>
  #include <QThread>
  #include <QWaitCondition>
- #include "lib/ZZCell.h"
+ #include <lib/ZZCell.h>
+ #include <backends/zzbackend.h>
 
  class ZZGraphWalker : public QThread
  {

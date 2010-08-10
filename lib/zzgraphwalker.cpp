@@ -3,10 +3,7 @@
  * Licensed under the GNU GPL v.3
  */
 #include <QtGui>
-
- #include <math.h>
-
- #include "renderthread.h"
+#include "zzgraphwalker.h"
 
  ZZGraphWalker::ZZGraphWalker(QObject *parent)
      : QThread(parent)
