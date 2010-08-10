@@ -4,7 +4,7 @@
 QT += webkit \
     multimedia 
 MAKEFILE = Makefile.qt
-TARGET = qtzz
+TARGET = dimscape
 DESTDIR = ../
 TEMPLATE = app
 INCLUDEPATH += ../
