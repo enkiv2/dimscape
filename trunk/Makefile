@@ -25,7 +25,7 @@ qtclean: Makefile.qt
 	make -f Makefile.qt clean
 
 Makefile.qt: FORCE
-	qmake qtzz.pro -o Makefile.qt
+	qmake qtzz.pro CONFIG=sql-backend
 
 FORCE:
 
