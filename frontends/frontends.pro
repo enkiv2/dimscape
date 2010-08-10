@@ -19,5 +19,6 @@ HEADERS += mainwindow.h \
     zzgraphicscell.h 
 FORMS += mainwindow.ui
 CONFIG += link_pkgconfig debug
+CONFIG -= sdl-backend
 # PKGCONFIG += yaml-cpp
 QMAKE_CXXFLAGS_DEBUG += -Wall
