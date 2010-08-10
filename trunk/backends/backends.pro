@@ -1,15 +1,15 @@
-CONFIG += qt staticlib
+CONFIG += qt staticlib sql
+MAKEFILE = Makefile.qt
 TARGET = backend
 TEMPLATE = lib
 INCLUDEPATH += ../
-HEADERS += zzbackend.h \
-	ZZCell.h
+HEADERS += zzbackend.h
 sql-backend {
 	SOURCES += zzsqlbackend.cpp
-	HEADERS +=	zzsqlbackend.h
+	HEADERS += zzsqlbackend.h
 } else {
 	error("You must select a backend: sql-backend, ...")
 }
-CONFIG += link_pkgconfig debug
+CONFIG += debug
 # PKGCONFIG += yaml-cpp
 QMAKE_CXXFLAGS_DEBUG += -Wall
