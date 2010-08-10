@@ -1,3 +1,8 @@
+/* ZZCell.cpp
+   (c) 2010 John Ohno
+   Licensed under the GNU GPL v.3
+*/
+
 #include <lib/ZZCell.h>
 
 QHash<cellID,ZZCell> world;

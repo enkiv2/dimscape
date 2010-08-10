@@ -1,4 +1,7 @@
-
+/* zzgraphwalker.cpp
+ * (c) 2010 Jonathan Kopetz
+ * Licensed under the GNU GPL v.3
+ */
 #include <QtGui>
 
  #include <math.h>

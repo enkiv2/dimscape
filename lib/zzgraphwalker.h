@@ -1,3 +1,7 @@
+/* zzgraphwalker.h
+ * (c) 2010 Jonathan Kopetz
+ * Licensed under the GNU GPL v.3
+ */
 
 #ifndef RENDERTHREAD_H
  #define RENDERTHREAD_H
