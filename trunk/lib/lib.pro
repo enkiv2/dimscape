@@ -3,6 +3,11 @@ MAKEFILE = Makefile.qt
 CONFIG += qt dll
 TARGET = zz
 VERSION = 1.0.0
+!isEmpty(prefix) {
+	unix:target.path = $${prefix}/lib
+	win32:target.path = $${prefix}/Dimscape
+	INSTALLS += target
+}
 TEMPLATE = lib
 INCLUDEPATH += ../
 SOURCES += ZZCell.cpp
