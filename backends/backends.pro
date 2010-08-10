@@ -1,4 +1,6 @@
-CONFIG += qt staticlib sql
+QT += sql
+QT -= gui
+CONFIG += qt staticlib
 MAKEFILE = Makefile.qt
 TARGET = backend
 TEMPLATE = lib
