@@ -10,7 +10,7 @@
 #include <QList>
 #include <QDebug>
 
-#include "lib/ZZCell.h"
+#include <lib/ZZCell.h>
 
 class ZZSqlBackend : public QObject
 {
