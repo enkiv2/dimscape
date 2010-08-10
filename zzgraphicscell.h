@@ -1,5 +1,10 @@
-#ifndef ZZGRAPHICSCELL2_H
-#define ZZGRAPHICSCELL2_H
+/* zzgraphicscell.h
+ * (c) 2010 John Ohno
+ * modified 2010 Jonathan Kopetz
+ * License under the GNU GPL v.3
+ */
+#ifndef ZZGRAPHICSCELL_H
+#define ZZGRAPHICSCELL_H
 
 #include <QGraphicsRectItem>
 #include <QList>
@@ -7,18 +12,18 @@
 #include "lib/ZZCell.h"
 
 
-class ZZGraphicsCell2 : public QGraphicsRectItem
+class ZZGraphicsCell : public QGraphicsRectItem
 {
 
 public:
-    ZZGraphicsCell2(QGraphicsItem* aParent = 0) :
+    ZZGraphicsCell(QGraphicsItem* aParent = 0) :
             QGraphicsRectItem(aParent), penThick(1)
     {
     	me=new ZZCell();
 	setFlags(ItemIsFocusable);
 	update();
     }
-    ZZGraphicsCell2(QRectF& aRect, QGraphicsItem* aParent = 0) :
+    ZZGraphicsCell(QRectF& aRect, QGraphicsItem* aParent = 0) :
             QGraphicsRectItem(aRect,aParent)
     {
     	me=new ZZCell();
@@ -53,4 +58,4 @@ private:
 
 };
 
-#endif // ZZGRAPHICSCELL2_H
+#endif // ZZGRAPHICSCELL_H
