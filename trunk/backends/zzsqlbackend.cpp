@@ -446,7 +446,7 @@ bool ZZSqlBackend::loadCell(cellID cid)
 	return true;
 }
 
-bool ZZSqlBackend::gatherIds(QSqlQuery& q, ZZCell& tempCell, ZZCell::cell_dir dir)
+bool ZZSqlBackend::gatherIds(QSqlQuery& q, ZZCell& tempCell, cell_dir dir)
 {
 	q.addBindValue(tempCell.getID());
 	if (!q.exec())
