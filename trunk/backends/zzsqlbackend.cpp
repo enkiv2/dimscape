@@ -457,7 +457,7 @@ bool ZZSqlBackend::gatherIds(QSqlQuery& q, ZZCell& tempCell, cell_dir dir)
 	}
 	while (q.next())
 	{
-		QString foo=dir.value(1).toString();
+		QString foo=q.value(1).toString();
 		switch (dir)
 		{
 			case NEGWARD:
@@ -473,7 +473,7 @@ bool ZZSqlBackend::gatherIds(QSqlQuery& q, ZZCell& tempCell, cell_dir dir)
 		}
 
 	}
-	dir.finish();
+	q.finish();
 	return true;
 }
 	
