@@ -1,4 +1,3 @@
-QT += sql
 QT -= gui
 CONFIG += qt staticlib
 MAKEFILE = Makefile.qt
@@ -7,6 +6,7 @@ TEMPLATE = lib
 INCLUDEPATH += ../
 HEADERS += zzbackend.h
 sql-backend {
+	QT += sql
 	SOURCES += zzsqlbackend.cpp
 	HEADERS += zzsqlbackend.h
 } else {
