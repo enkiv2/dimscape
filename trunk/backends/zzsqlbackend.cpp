@@ -434,10 +434,10 @@ bool ZZSqlBackend::loadCell(cellID cid)
 
 	bool ret;
 
-	ret = gatherIds(gatherCellPos, tempCell);
+	ret = gatherIds(gatherCellPos, tempCell, POSWARD);
 	if (!ret) 
 		return ret;
-	ret = gatherIds(gatherCellNeg, tempCell);
+	ret = gatherIds(gatherCellNeg, tempCell, NEGWARD);
 	if (!ret) 
 		return ret;
 
@@ -446,20 +446,32 @@ bool ZZSqlBackend::loadCell(cellID cid)
 	return true;
 }
 
-bool ZZSqlBackend::gatherIds(QSqlQuery& dir, ZZCell& tempCell)
+bool ZZSqlBackend::gatherIds(QSqlQuery& q, ZZCell& tempCell, ZZCell::cell_dir dir)
 {
-	dir.addBindValue(tempCell.getID());
-	if (!dir.exec())
+	q.addBindValue(tempCell.getID());
+	if (!q.exec())
 	{
 		qDebug() << "Could not load connections from cell: " << tempCell.getID() << "\n"
-			<< dir.lastError().text() << "\n";
+			<< q.lastError().text() << "\n";
 		return false;
 	}
-	while (dir.next())
+	while (q.next())
 	{
 		QString foo=dir.value(1).toString();
-		tempCell.setPos((qint64)(dir.value(0).toLongLong()),
+		switch (dir)
+		{
+			case NEGWARD:
+			tempCell.setNeg((qint64)(q.value(0).toLongLong()),
 				foo);
+			break;
+			case POSWARD:
+			tempCell.setPos((qint64)(q.value(0).toLongLong()),
+				foo);
+			break;
+			default:
+			break;
+		}
+
 	}
 	dir.finish();
 	return true;
