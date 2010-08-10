@@ -5,6 +5,11 @@ QT += webkit \
     multimedia 
 MAKEFILE = Makefile.qt
 TARGET = dimscape
+!isEmpty(prefix) {
+	unix:target.path = $${prefix}/bin
+	win32:target.path = $${prefix}/Dimscape
+	INSTALLS += target
+}
 DESTDIR = ../
 TEMPLATE = app
 INCLUDEPATH += ../
