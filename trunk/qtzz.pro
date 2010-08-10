@@ -6,5 +6,6 @@ SUBDIRS += backends \
 	frontends \ 
 	lib
 CONFIG += link_pkgconfig debug
+MAKEFILE = Makefile.qt
 # PKGCONFIG += yaml-cpp
 QMAKE_CXXFLAGS_DEBUG += -Wall
