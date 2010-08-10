@@ -3,9 +3,11 @@
 # -------------------------------------------------
 QT += webkit \
     multimedia 
+MAKEFILE = Makefile.qt
 TARGET = qtzz
 DESTDIR = ../
 TEMPLATE = app
+INCLUDEPATH += ../
 LIBS += -lzz -L../lib \
 	-lbackend -L../backends
 SOURCES += main.cpp \
