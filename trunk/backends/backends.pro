@@ -1,16 +1,10 @@
-QT -= gui
-CONFIG += qt staticlib
-MAKEFILE = Makefile.qt
-TARGET = backend
-TEMPLATE = lib
-INCLUDEPATH += ../
-HEADERS += zzbackend.h
-sql-backend {
-	QT += sql
-	SOURCES += zzsqlbackend.cpp
-	HEADERS += zzsqlbackend.h
-} else {
+TEMPLATE = subdirs
+BACKENDS = $$find(CONFIG, .*-backend)
+isEmpty(BACKENDS) {
 	error("You must select a backend: sql-backend, ...")
+}
+sql-backend {
+SUBDIRS += sql
 }
 CONFIG += debug
 # PKGCONFIG += yaml-cpp
