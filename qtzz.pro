@@ -10,3 +10,5 @@ CONFIG += link_pkgconfig debug
 MAKEFILE = Makefile.qt
 # PKGCONFIG += yaml-cpp
 QMAKE_CXXFLAGS_DEBUG += -Wall
+
+sql-backend:DEFINES += SQL_BACKEND
